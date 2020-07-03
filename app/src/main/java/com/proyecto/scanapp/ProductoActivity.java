@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.proyecto.scanapp.clases.DbManager;
+import com.proyecto.scanapp.DB.DbManager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
