@@ -1,4 +1,4 @@
-package com.example.scanapp2;
+package com.proyecto.scanapp;
 
 import android.Manifest;
 import android.content.Context;

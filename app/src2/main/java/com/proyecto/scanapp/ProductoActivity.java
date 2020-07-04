@@ -1,4 +1,4 @@
-package com.example.scanapp2;
+package com.proyecto.scanapp;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.scanapp2.DB.DbManager;
+import com.proyecto.scanapp.DB.DbManager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

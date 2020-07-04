@@ -1,4 +1,4 @@
-package com.example.scanapp2.clases;
+package com.proyecto.scanapp.clases;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

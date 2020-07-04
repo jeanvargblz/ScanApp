@@ -1,4 +1,4 @@
-package com.example.scanapp2.DB;
+package com.proyecto.scanapp.DB;
 
 import android.content.ContentValues;
 import android.content.Context;

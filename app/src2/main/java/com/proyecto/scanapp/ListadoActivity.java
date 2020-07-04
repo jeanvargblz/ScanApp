@@ -1,4 +1,4 @@
-package com.example.scanapp2;
+package com.proyecto.scanapp;
 
 import android.Manifest;
 import android.content.Context;
@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ListadoActivity extends AppCompatActivity {
 
-    private Button btnScanner, btnUbi;
+    private Button btnScanner, btnUbi, btnOrientacion, btnMovimiento;
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     @Override
@@ -28,6 +28,8 @@ public class ListadoActivity extends AppCompatActivity {
 
         btnScanner =findViewById(R.id.btnScanner);
         btnUbi  =findViewById(R.id.btnUbicacion);
+        btnOrientacion = findViewById(R.id.btnOrientacion);
+        btnMovimiento = findViewById(R.id.btnMovimiento);
 
 
         btnScanner.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +43,20 @@ public class ListadoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Ubicacion.class));
+            }
+        });
+
+        btnOrientacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Orientation.class));
+            }
+        });
+
+        btnMovimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Movement.class));
             }
         });
 
