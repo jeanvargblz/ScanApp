@@ -52,7 +52,7 @@ public class MoveSensorEventListener implements SensorEventListener {
     public void determineMovement(double acceleration) {
 
 
-        if (acceleration >= 1 && !estadoMensaje) {
+        if (acceleration >= 8 && !estadoMensaje) {
 
             LectorActivity.getInstance().showMessage();
 

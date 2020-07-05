@@ -1,8 +1,16 @@
 package com.proyecto.scanapp;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.icu.util.Calendar;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,23 +24,29 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.proyecto.scanapp.DB.DbManager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Locale;
 
 public class ProductoActivity extends AppCompatActivity {
 
     private DbManager db;
     private Cursor c;
     private ImageView _foto;
-    private TextView _nombre, _descripcion, _precio, _stock, estado;
+    private TextView _nombre, _descripcion, _precio, _stock, estado, cor, latlon;
     private ProgressBar _pb;
     private Button btnRegistrar, btnRegresar;
+    private LocationManager ubicacion;
+
 
     private static  final String DB_URL = "jdbc:mysql://192.168.0.29/qr";
     private static  final String USER = "jean";
@@ -55,6 +69,11 @@ public class ProductoActivity extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.btnRegistrar);
         btnRegresar = findViewById(R.id.btnRegresar);
         estado = findViewById(R.id.estado);
+
+
+        cor = findViewById(R.id.txtCor);
+        latlon = findViewById(R.id.txtLatLon);
+
 
 
         int id = getIntent().getExtras().getInt("id");
@@ -82,6 +101,9 @@ public class ProductoActivity extends AppCompatActivity {
         }else {
             Toast.makeText(getApplicationContext(),"NO EXISTE VALOR",Toast.LENGTH_LONG).show();
         }
+
+        registrarLocalizacion();
+
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -158,6 +180,53 @@ public class ProductoActivity extends AppCompatActivity {
             if(isSuccess) {
                 startActivity(new Intent(ProductoActivity.this,ListadoActivity.class));
             }
+        }
+    }
+
+    private void registrarLocalizacion() {
+
+        ubicacion = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            return;
+        }
+        ubicacion.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, new ProductoActivity.LocalizacionListener());
+    }
+
+    private class LocalizacionListener implements LocationListener {
+
+
+        @Override
+        public void onLocationChanged(Location location) {
+            String lat = "Latitud: " +location.getLatitude();
+            String lon = "Longitud: " +location.getLongitude();
+
+
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            try {
+                List<Address> direccion = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                cor.setText(direccion.get(0).getAddressLine(0));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            latlon.setText(lat+" "+lon);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
         }
     }
 

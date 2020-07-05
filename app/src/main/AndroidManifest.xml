@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Orientation"></activity>
+
+        <activity android:name=".Orientation" />
         <activity android:name=".Movement" />
         <activity android:name=".Ubicacion" />
         <activity android:name=".RegistroActivity" />
@@ -39,7 +40,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".LocationBroadcastReceiver">
+        <receiver android:name=".Sensor.LocationBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.location.LocationManager.KEY_LOCATION_CHANGED" />
             </intent-filter>

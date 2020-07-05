@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.proyecto.scanapp.Sensor.LocationBroadcastReceiver;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -52,19 +54,7 @@ public class Ubicacion extends AppCompatActivity {
             }
         });
 
-        /*
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stopGPS();
-            }
-        });
-         */
 
-
-
-
-//        localizacion();
 
         registrarLocalizacion();
 
@@ -90,21 +80,7 @@ public class Ubicacion extends AppCompatActivity {
         }
     }
 
-    /*
-    private void localizacion() {
 
-        checkPermission();
-        ubicacion = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location loc = ubicacion.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (ubicacion != null) {
-//            Log.d("LOCALIZACION: LATITUD=", String.valueOf(loc.getLatitude()));
-//            Log.d("LOCALIZACION: LONGITUD=", String.valueOf(loc.getLongitude()));
-//            latitud.setText(String.valueOf(loc.getLatitude()));
-//            longitud.setText(String.valueOf(loc.getLongitude()));
-        }
-    }
-
-     */
 
     public void initGPS() {
 
@@ -124,10 +100,6 @@ public class Ubicacion extends AppCompatActivity {
         }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, pendingIntent);
     }
-
-
-
-
 
     private void registrarLocalizacion() {
 

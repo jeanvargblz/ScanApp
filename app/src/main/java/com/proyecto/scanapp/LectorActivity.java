@@ -90,6 +90,8 @@ public class LectorActivity extends AppCompatActivity {
         });
     }
 
+
+
     public static LectorActivity getInstance() {
         return ins;
     }
@@ -113,6 +115,8 @@ public class LectorActivity extends AppCompatActivity {
         super.onPause();
         sensorManager.unregisterListener(moveSensorEventListener);
     }
+
+
 
 
 }
