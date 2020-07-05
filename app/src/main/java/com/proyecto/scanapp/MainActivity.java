@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         db= new DbManager(getApplicationContext());
+        setTitle("");
+
 
         btn_entrar= findViewById(R.id.btnentrar);
 
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-
+                        /*
                         db.borrarTable("promociones");
                         JSONArray prm = response.getJSONArray("listapromociones");
                         for(int i=0;i<prm.length();i++){
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
+                         */
                     }
                     //llenar db sqlite
                 }catch (Exception e){

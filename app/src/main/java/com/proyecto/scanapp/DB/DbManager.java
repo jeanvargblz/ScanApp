@@ -25,6 +25,7 @@ public class DbManager {
                    "precio real not null,"+
                    "stock integer not null);";
 
+   /*
     public static final String TABLA_PROMOCIONES = "promociones";
     public static final String PROMOCIONES_ID = "_id";
     public static final String PROMOCIONES_NOMBRE = "nombre";
@@ -38,6 +39,7 @@ public class DbManager {
                    "descripcion text not null,"+
                    "foto text not null,"+
                    "productos_id integer not null);";
+    */
 
     private BdHelper helper;
     private SQLiteDatabase db;
@@ -68,7 +70,7 @@ public class DbManager {
         return db.insert(TABLA_PRODUCTOS,null,generarProductos(id, nombre, descripcion, foto, precio, stock));
     }
     //CREAR PROMOCIONES
-    private ContentValues generarPromociones(int id, String nombre, String descripcion, String foto, int productos_id){
+/*    private ContentValues generarPromociones(int id, String nombre, String descripcion, String foto, int productos_id){
         ContentValues init = new ContentValues();
         init.put(PROMOCIONES_ID,id);
         init.put(PROMOCIONES_NOMBRE,nombre);
@@ -80,6 +82,8 @@ public class DbManager {
     public long insertarPromociones(int id, String nombre, String descripcion, String foto, int productos_id){
         return db.insert(TABLA_PROMOCIONES,null,generarPromociones(id, nombre, descripcion, foto, productos_id));
     }
+
+ */
 
     public Cursor getCursor(String tabla, String condicion) throws SQLException{
         String q = "SELECT * FROM "+tabla+ " WHERE "+condicion;

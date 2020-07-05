@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Bienvenido");
+        setTitle("Iniciar Sesion");
 
         btnlogin = findViewById(R.id.btnlogin);
         txtemail = findViewById(R.id.txtemail);

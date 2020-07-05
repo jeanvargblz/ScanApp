@@ -2,44 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="50dp"
     tools:context=".RegistroActivity">
 
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/icono" />
+
     <EditText
         android:id="@+id/txtnombre"
-        android:hint="INGRESE NOMBRE"
-        android:textSize="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:hint="INGRESE NOMBRE"
+        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/txtemail"
-        android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="INGRESE CORREO" />
+        android:hint="INGRESE CORREO"
+        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/txtpassword"
-        android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="INGRESE CONTRASEÑA" />
+        android:hint="INGRESE CONTRASEÑA"
+        android:textSize="15dp" />
 
     <Button
         android:id="@+id/btnregistrarse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btnlogin"
-        android:layout_marginTop = "15dp"
-        android:textSize="15dp"
         android:text="REGISTRAR"
         android:textColor="@color/colorWhite"
-        />
+        android:textSize="15dp" />
 
 </LinearLayout>

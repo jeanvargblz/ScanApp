@@ -82,7 +82,7 @@ public class ProductoActivity extends AppCompatActivity {
         }else {
             Toast.makeText(getApplicationContext(),"NO EXISTE VALOR",Toast.LENGTH_LONG).show();
         }
-/*
+
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -92,7 +92,7 @@ public class ProductoActivity extends AppCompatActivity {
                 objSend.execute("");
             }
         });
-*/
+
 
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override

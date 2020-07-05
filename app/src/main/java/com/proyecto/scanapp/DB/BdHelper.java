@@ -18,13 +18,13 @@ public class BdHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(DbManager.TABLA_PRODUCTOS_CREATE);
-        sqLiteDatabase.execSQL(DbManager.TABLA_PROMOCIONES_CREATE);
+//        sqLiteDatabase.execSQL(DbManager.TABLA_PROMOCIONES_CREATE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS productos");
-        db.execSQL("DROP TABLE IF EXISTS promociones");
+//        db.execSQL("DROP TABLE IF EXISTS promociones");
         onCreate(db);
     }
 }

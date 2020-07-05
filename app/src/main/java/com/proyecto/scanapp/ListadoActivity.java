@@ -24,7 +24,7 @@ public class ListadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
-        setTitle("Principal");
+        setTitle("");
 
         btnScanner =findViewById(R.id.btnScanner);
         btnUbi  =findViewById(R.id.btnUbicacion);
