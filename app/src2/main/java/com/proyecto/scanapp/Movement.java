@@ -6,11 +6,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.proyecto.scanapp.Sensor.MoveSensorEventListener;
 import com.proyecto.scanapp.Sensor.OrientSensorEventListener;
 
 public class Movement extends AppCompatActivity {
+    private static Movement ins;
     SensorManager sensorManager;
     MoveSensorEventListener moveSensorEventListener;
 
@@ -18,6 +20,7 @@ public class Movement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ins = this;
         setContentView(R.layout.activity_orientation);
 
         initSensor();
@@ -29,7 +32,7 @@ public class Movement extends AppCompatActivity {
         sensorManager.registerListener(
                 moveSensorEventListener,
                 sensorAccelerometer,
-                SensorManager.SENSOR_DELAY_NORMAL);
+                SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
@@ -37,4 +40,19 @@ public class Movement extends AppCompatActivity {
         super.onPause();
         sensorManager.unregisterListener(moveSensorEventListener);
     }
+    public static Movement getInstance(){
+        return ins;
+    }
+
+    public void showMessage(){
+        Movement.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast toast = Toast.makeText(ins,"No mueva el Dispositivo",Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+    }
+
 }

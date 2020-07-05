@@ -1,43 +1,53 @@
 package com.proyecto.scanapp.Sensor;
 
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.proyecto.scanapp.LectorActivity;
+import com.proyecto.scanapp.Movement;
+
+import androidx.annotation.Nullable;
 
 public class MoveSensorEventListener implements SensorEventListener {
     private static final String TAG = "AcceSensorEventListener";
     private float mLastX, mLastY, mLastZ;
-    private float mHighPassx, mHighPassy,mHighPassz;
-
+    private float mHighPassx, mHighPassy, mHighPassz;
+    private float initx = 0, inity = 0, initz = 0;
     private float a1 = 0.85f;
     private float[] accelerationValues;
-    private float[] magneticValues;
-
+    private boolean estadoMensaje;
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float x, y, z;
+        float currentx, currenty, currentz;
+
         double sumOfSquares, acceleration;
         accelerationValues = event.values.clone();
-                x = accelerationValues[0];
-                y = accelerationValues[1];
-                z = accelerationValues[2];
+        currentx = accelerationValues[0];
+        currenty = accelerationValues[1];
+        currentz = accelerationValues[2];
 
-                mHighPassx = highPass(x, mLastX, mHighPassx);
-                mHighPassy = highPass(y, mLastY, mHighPassy);
-                mHighPassz = highPass(z, mLastZ, mHighPassz);
+        mHighPassx = highPass(currentx, mLastX, mHighPassx);
+        mHighPassy = highPass(currenty, mLastY, mHighPassy);
+        mHighPassz = highPass(currentz, mLastZ, mHighPassz);
 
-                mLastX = x;
-                mLastY = y;
-                mLastZ = z;
+        mLastX = currentx;
+        mLastY = currenty;
+        mLastZ = currentz;
 
 
-                sumOfSquares = (mHighPassx * mHighPassx) + (mHighPassy * mHighPassy) + (mHighPassz * mHighPassz);
-                acceleration = Math.sqrt(sumOfSquares);
-                determineMovement(acceleration);
-                Log.d(TAG, "Acceleration: "+"x: "+mHighPassx+",\t\ty: " + mHighPassy+",\t\tz:"+mHighPassz +",\t\tacceleration:"+acceleration);
+        sumOfSquares = (mHighPassx * mHighPassx) + (mHighPassy * mHighPassy) + (mHighPassz * mHighPassz);
+        acceleration = Math.sqrt(sumOfSquares);
+        determineMovement(acceleration);
+        Log.d(TAG, "Acceleration: " + "x: " + mHighPassx + ",\t\ty: " + mHighPassy + ",\t\tz:" + mHighPassz + ",\t\tacceleration:" + acceleration);
 
 
     }
@@ -48,18 +58,25 @@ public class MoveSensorEventListener implements SensorEventListener {
 
     }
 
-    private void determineMovement(double acceleration){
-        if(acceleration>= 2){
+    public void determineMovement(double acceleration) {
+
+
+        if (acceleration >= 1 && !estadoMensaje) {
+
+            LectorActivity.getInstance().showMessage();
 
             Log.d("ESTADO", "NO MUEVA EL DISPOSITIVO");
-        }
-        else {
+            estadoMensaje = true;
 
-            Log.d("ESTADO", "DISPOSITIVO QUIETO");
+        } else {
+            estadoMensaje = false;
         }
 
     }
+
     private float highPass(float current, float last, float filtered) {
         return a1 * (filtered + current - last);
     }
+
+
 }

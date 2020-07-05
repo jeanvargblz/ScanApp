@@ -8,10 +8,6 @@ import android.util.Log;
 
 public class OrientSensorEventListener implements SensorEventListener {
     private static final String TAG = "AcceSensorEventListener";
-    private float mLastX, mLastY, mLastZ;
-    private float mHighPassx, mHighPassy,mHighPassz;
-
-    private float a1 = 0.85f;
     private float[] accelerationValues;
     private float[] magneticValues;
 
@@ -19,9 +15,6 @@ public class OrientSensorEventListener implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         float[] rotationMatrix;
-        float x, y, z;
-        double sumOfSquares, acceleration;
-
 
         switch (event.sensor.getType()) {
 
@@ -33,29 +26,6 @@ public class OrientSensorEventListener implements SensorEventListener {
                 {
                     determineOrientation(rotationMatrix);
                 }
-
-               /* x = accelerationValues[0];
-                y = accelerationValues[1];
-                z = accelerationValues[2];
-
-                mHighPassx = highPass(x, mLastX, mHighPassx);
-                mHighPassy = highPass(y, mLastY, mHighPassy);
-                mHighPassz = highPass(z, mLastZ, mHighPassz);
-
-                mLastX = x;
-                mLastY = y;
-                mLastZ = z;
-
-                Log.d(TAG, "Current: "+"x: "+x+",\t\ty: " + y+",\t\tz:"+z);
-                Log.d(TAG, "Filtered: "+ "x: "+mHighPassx+",\t\ty: "+mHighPassy+",\t\tz: "+mHighPassz);
-
-
-                sumOfSquares = (mHighPassx * mHighPassx) + (mHighPassy * mHighPassy) + (mHighPassz * mHighPassz);
-                acceleration = Math.sqrt(sumOfSquares);
-
-                Log.d(TAG, "Acceleration: "+"x: "+mHighPassx+",\t\ty: " + mHighPassy+",\t\tz:"+mHighPassz +",\t\tacceleration:"+acceleration);
-
-                */
 
                 break;
 
@@ -137,18 +107,5 @@ public class OrientSensorEventListener implements SensorEventListener {
             }
         }
     }
-    private void determineMovement(double current, double last){
-        if((Math.abs(current - last) )>= 3){
 
-            Log.d("ESTADO", "NO MUEVA EL DISPOSITIVO");
-        }
-        else {
-
-            Log.d("ESTADO", "DISPOSITIVO QUIETO");
-        }
-
-    }
-    private float highPass(float current, float last, float filtered) {
-        return a1 * (filtered + current - last);
-    }
 }
