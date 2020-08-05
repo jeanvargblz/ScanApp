@@ -7,7 +7,7 @@
     android:background="@color/colorAccent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Ubicacion">
+    tools:context=".Sensor.Ubicacion">
 
     <TextView
         android:id="@+id/textView4"

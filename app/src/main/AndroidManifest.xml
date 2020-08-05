@@ -23,16 +23,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".Orientation" />
-        <activity android:name=".Movement" />
-        <activity android:name=".Ubicacion" />
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ListadoActivity" />
-        <activity android:name=".ProductoActivity" />
-        <activity android:name=".LectorActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".Sensor.Movement" />
+        <activity android:name=".Sensor.Ubicacion" />
+        <activity android:name=".Inicio.RegistroActivity" />
+        <activity android:name=".Inicio.LoginActivity" />
+        <activity android:name=".Inicio.ListadoActivity" />
+        <activity android:name=".Modelo.ProductoActivity" />
+        <activity android:name=".Sensor.LectorActivity" />
+        <activity android:name=".Inicio.MainActivity" />
+        <activity android:name=".Inicio.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

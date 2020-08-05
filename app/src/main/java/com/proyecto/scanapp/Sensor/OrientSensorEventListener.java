@@ -5,10 +5,14 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
+import com.proyecto.scanapp.Inicio.ListadoActivity;
+
 public class OrientSensorEventListener implements SensorEventListener {
     private static final String TAG = "AcceSensorEventListener";
     private float[] accelerationValues;
     private float[] magneticValues;
+    private boolean estado = false;
+    private int cont = 0;
 
 
     @Override
@@ -29,7 +33,6 @@ public class OrientSensorEventListener implements SensorEventListener {
                 break;
 
             case Sensor.TYPE_MAGNETIC_FIELD:
-                Log.d(TAG, "magnetometer:");
                 magneticValues = event.values.clone();
                 rotationMatrix = generateRotationMatrix();
 
@@ -79,11 +82,26 @@ public class OrientSensorEventListener implements SensorEventListener {
         double azimuth = Math.toDegrees(orientationValues[0]);
         double pitch = Math.toDegrees(orientationValues[1]);
         double roll = Math.toDegrees(orientationValues[2]);
-        Log.d("pitch", "" + pitch);
-        Log.d("azimuth", "" + azimuth);
-        Log.d("roll", "" + roll);
 
+        if (pitch <= 10) {
+            if (Math.abs(roll) >= 170 && !estado) {
+                Log.d("ESTADO ORIENTACION", "BOCA ABAJO ");
+                cont ++;
+                estado = true;
 
+            } else if (Math.abs(roll) <= 10 && estado) {
+                Log.d("ESTADO ORIENTACION", "BOCA ARRIBA");
+                estado = false;
+
+            }
+        }
+        if(cont >= 2){
+            ListadoActivity.getInstance().openLector();
+            Log.d("ESTADO ORIENTACION","ABRIENDO CAMARA");
+            cont = 0;
+        }
+
+        /*
         if (Math.abs(pitch) <= 3 && !(Math.abs(roll) >= 3)) {
             Log.d("ORIENTACION", "HECHADO");
 
@@ -98,13 +116,15 @@ public class OrientSensorEventListener implements SensorEventListener {
 
             }
             else if (Math.abs(roll) >= 170) {
-                Log.d("ORIENTACION", "BOCA ABAJO");
+                Log.d("ORIENTACION", "BOCA ABAJO "+roll);
 
             } else if (Math.abs(roll) <= 10) {
                 Log.d("ORIENTACION", "BOCA ARRIBA");
 
             }
         }
+
+         */
     }
 
 }

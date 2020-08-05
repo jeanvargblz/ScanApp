@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "100978356",
+    "firebase_url": "https://scanapp-529ed.firebaseio.com",
+    "project_id": "scanapp-529ed",
+    "storage_bucket": "scanapp-529ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100978356:android:9c7ccf81a2c1def3ac91e1",
+        "android_client_info": {
+          "package_name": "com.proyecto.scanapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100978356-abi31vu2f0c97kibo63tebf9vtik3vlh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.scanapp",
+            "certificate_hash": "46cb66f0ee2d903eae3fd4038f1da0b7b71a91e4"
+          }
+        },
+        {
+          "client_id": "100978356-5fmhh8hf0m5iuukqh8nr3qc1c68a16r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_nieE-VkasXPtLXvl0K7aZHCOaYssNFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100978356-5fmhh8hf0m5iuukqh8nr3qc1c68a16r2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

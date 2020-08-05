@@ -5,8 +5,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.util.Log;
 
-import com.proyecto.scanapp.LectorActivity;
-
 public class MoveSensorEventListener implements SensorEventListener {
     private static final String TAG = "AcceSensorEventListener";
     private float mLastX, mLastY, mLastZ;
@@ -38,8 +36,7 @@ public class MoveSensorEventListener implements SensorEventListener {
         sumOfSquares = (mHighPassx * mHighPassx) + (mHighPassy * mHighPassy) + (mHighPassz * mHighPassz);
         acceleration = Math.sqrt(sumOfSquares);
         determineMovement(acceleration);
-        Log.d(TAG, "Acceleration: " + "x: " + mHighPassx + ",\t\ty: " + mHighPassy + ",\t\tz:" + mHighPassz + ",\t\tacceleration:" + acceleration);
-
+        // Log.d(TAG, "Acceleration: " + "x: " + mHighPassx + ",\t\ty: " + mHighPassy + ",\t\tz:" + mHighPassz + ",\t\tacceleration:" + acceleration);
 
     }
 
@@ -51,15 +48,15 @@ public class MoveSensorEventListener implements SensorEventListener {
 
     public void determineMovement(double acceleration) {
 
-
         if (acceleration >= 8 && !estadoMensaje) {
 
             LectorActivity.getInstance().showMessage();
 
-            Log.d("ESTADO", "NO MUEVA EL DISPOSITIVO");
+            Log.d("ESTADO MOVIMIENTO", "NO MUEVA EL DISPOSITIVO");
             estadoMensaje = true;
 
-        } else {
+        } else if(acceleration <=1 && estadoMensaje) {
+            Log.d("ESTADO MOVIMIENTO", "DISPOSITIVO QUIETO ");
             estadoMensaje = false;
         }
 
