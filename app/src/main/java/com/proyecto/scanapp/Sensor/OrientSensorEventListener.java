@@ -101,30 +101,6 @@ public class OrientSensorEventListener implements SensorEventListener {
             cont = 0;
         }
 
-        /*
-        if (Math.abs(pitch) <= 3 && !(Math.abs(roll) >= 3)) {
-            Log.d("ORIENTACION", "HECHADO");
-
-        }
-        else if (pitch <= 10) {
-            if (roll >= 45 && roll <= 100){
-                Log.d("ORIENTACION", "VERTICAL DERECHA");
-
-            }
-            else if(roll <= -45 && roll >= -100){
-                Log.d("ORIENTACION", "VERTICAL IZQUIERDA");
-
-            }
-            else if (Math.abs(roll) >= 170) {
-                Log.d("ORIENTACION", "BOCA ABAJO "+roll);
-
-            } else if (Math.abs(roll) <= 10) {
-                Log.d("ORIENTACION", "BOCA ARRIBA");
-
-            }
-        }
-
-         */
     }
 
 }

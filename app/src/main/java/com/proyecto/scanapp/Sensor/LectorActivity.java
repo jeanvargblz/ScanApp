@@ -101,7 +101,7 @@ public class LectorActivity extends AppCompatActivity {
 
     private void initSensor() {
         sensorManager  = (SensorManager) getSystemService(SENSOR_SERVICE);
-        Sensor sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         moveSensorEventListener = new MoveSensorEventListener();
         sensorManager.registerListener(
                 moveSensorEventListener,

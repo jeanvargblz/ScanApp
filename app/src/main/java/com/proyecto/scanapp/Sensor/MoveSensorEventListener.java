@@ -7,36 +7,37 @@ import android.util.Log;
 
 public class MoveSensorEventListener implements SensorEventListener {
     private static final String TAG = "AcceSensorEventListener";
-    private float mLastX, mLastY, mLastZ;
-    private float mHighPassx, mHighPassy, mHighPassz;
-    private float initx = 0, inity = 0, initz = 0;
-    private float a1 = 0.85f;
+
+    private float alpha = 0.3f;
+    private float beta = 0.3f;
     private float[] accelerationValues;
     private boolean estadoMensaje;
+    private DoubleExponentialSmoothing doubleSmoothing;
+
+    public MoveSensorEventListener(){
+        doubleSmoothing = new DoubleExponentialSmoothing(alpha,beta);
+    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float currentx, currenty, currentz;
 
-        double sumOfSquares, acceleration;
+        double sumOfSquares, acceleration,acceleration1;
         accelerationValues = event.values.clone();
-        currentx = accelerationValues[0];
-        currenty = accelerationValues[1];
-        currentz = accelerationValues[2];
-
-        mHighPassx = highPass(currentx, mLastX, mHighPassx);
-        mHighPassy = highPass(currenty, mLastY, mHighPassy);
-        mHighPassz = highPass(currentz, mLastZ, mHighPassz);
-
-        mLastX = currentx;
-        mLastY = currenty;
-        mLastZ = currentz;
+        float currentx = accelerationValues[0];
+        float currenty = accelerationValues[1];
+        float currentz = accelerationValues[2];
 
 
-        sumOfSquares = (mHighPassx * mHighPassx) + (mHighPassy * mHighPassy) + (mHighPassz * mHighPassz);
-        acceleration = Math.sqrt(sumOfSquares);
+        sumOfSquares = (currentx * currentx) + (currenty * currenty) + (currentz * currentz);
+        acceleration1 = Math.sqrt(sumOfSquares);
+
+        doubleSmoothing.pushValue((float) acceleration1);
+        acceleration = doubleSmoothing.getValue();
+
         determineMovement(acceleration);
-        // Log.d(TAG, "Acceleration: " + "x: " + mHighPassx + ",\t\ty: " + mHighPassy + ",\t\tz:" + mHighPassz + ",\t\tacceleration:" + acceleration);
+
+        Log.d(TAG,  acceleration1+ ","+ acceleration);
+
 
     }
 
@@ -48,7 +49,7 @@ public class MoveSensorEventListener implements SensorEventListener {
 
     public void determineMovement(double acceleration) {
 
-        if (acceleration >= 8 && !estadoMensaje) {
+        if (acceleration >= 3 && !estadoMensaje) {
 
             LectorActivity.getInstance().showMessage();
 
@@ -61,10 +62,5 @@ public class MoveSensorEventListener implements SensorEventListener {
         }
 
     }
-
-    private float highPass(float current, float last, float filtered) {
-        return a1 * (filtered + current - last);
-    }
-
 
 }
